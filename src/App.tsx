@@ -1,9 +1,9 @@
-import React from "react";
+import { FC } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LoginPage from "pages/LoginPage";
+import LoginPage from "pages/LoginPage/LoginPage";
 import SearchPage from "pages/SearchPage";
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <Router>
       <Routes>
