@@ -5,7 +5,7 @@
     "skipLibCheck": true,
     "strict": true,
     "declaration": false,
-    "outDir": "./dist"
+    "outDir": "./dist",
   },
   "include": ["src/**/*.{ts,tsx}"],
   "files": [],

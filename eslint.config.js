@@ -20,7 +20,6 @@ export default [
     rules: {
       "react/react-in-jsx-scope": "off",
 
-      // Accessibility Rules
       "jsx-a11y/anchor-is-valid": [
         "warn", 
         {
@@ -41,7 +40,7 @@ export default [
     },
     settings: {
       react: {
-        version: "detect", // Automatically detects the React version
+        version: "detect",
       },
     },
   },

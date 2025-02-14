@@ -8,6 +8,11 @@
     "skipLibCheck": true,
     "composite": true,
     "emitDeclarationOnly": true,
+    "paths": {
+      "*": [
+        "./src/*"
+      ]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
