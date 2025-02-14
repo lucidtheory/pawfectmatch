@@ -15,32 +15,32 @@ export default [
   {
     plugins: {
       prettier: pluginPrettier,
-      a11y: pluginA11y,
+      "jsx-a11y": pluginA11y,
     },
     rules: {
       "react/react-in-jsx-scope": "off",
 
       // Accessibility Rules
-      "a11y/anchor-is-valid": [
+      "jsx-a11y/anchor-is-valid": [
         "warn", 
         {
           "aspects": ["noHref", "invalidHref", "preferButton"]
         }
       ],
-      "a11y/alt-text": "warn",
-      "a11y/aria-role": "warn",
-      "a11y/aria-props": "warn",
-      "a11y/aria-unsupported-elements": "warn",
-      "a11y/heading-has-content": "warn",
-      "a11y/heading-order": "warn",
-      "a11y/no-autofocus": "warn",
-      "a11y/no-onchange": "warn",
-      "a11y/no-noninteractive-element-interactions": "warn",
-      "a11y/no-noninteractive-tabindex": "warn",
-      "a11y/tabindex-no-positive": "warn",
-      "a11y/valid-aria-role": "warn",
-      "a11y/valid-alt-text": "warn",
-      "a11y/scope": "warn",
+      "jsx-a11y/alt-text": "warn",
+      "jsx-a11y/aria-role": "warn",
+      "jsx-a11y/aria-props": "warn",
+      "jsx-a11y/aria-unsupported-elements": "warn",
+      "jsx-a11y/heading-has-content": "warn",
+      "jsx-a11y/heading-order": "warn",
+      "jsx-a11y/no-autofocus": "warn",
+      "jsx-a11y/no-onchange": "warn",
+      "jsx-a11y/no-noninteractive-element-interactions": "warn",
+      "jsx-a11y/no-noninteractive-tabindex": "warn",
+      "jsx-a11y/tabindex-no-positive": "warn",
+      "jsx-a11y/valid-aria-role": "warn",
+      "jsx-a11y/valid-alt-text": "warn",
+      "jsx-a11y/scope": "warn",
     },
   },
 ];
