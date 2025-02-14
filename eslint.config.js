@@ -32,15 +32,17 @@ export default [
       "jsx-a11y/aria-props": "warn",
       "jsx-a11y/aria-unsupported-elements": "warn",
       "jsx-a11y/heading-has-content": "warn",
-      "jsx-a11y/heading-order": "warn",
       "jsx-a11y/no-autofocus": "warn",
       "jsx-a11y/no-onchange": "warn",
       "jsx-a11y/no-noninteractive-element-interactions": "warn",
       "jsx-a11y/no-noninteractive-tabindex": "warn",
       "jsx-a11y/tabindex-no-positive": "warn",
-      "jsx-a11y/valid-aria-role": "warn",
-      "jsx-a11y/valid-alt-text": "warn",
       "jsx-a11y/scope": "warn",
+    },
+    settings: {
+      react: {
+        version: "detect", // Automatically detects the React version
+      },
     },
   },
 ];
