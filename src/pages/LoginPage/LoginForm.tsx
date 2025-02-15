@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { SubmitHandler, FormProvider, useForm } from "react-hook-form";
 import Input from "components/forms/Input";
 import { EMAIL_REGEX, NAME_REGEX } from "utils/regex";
@@ -31,7 +31,7 @@ const LoginForm: FC = () => {
   const navigate = useNavigate();
   const [login, { isLoading, isError }] = useLoginMutation();
 
-  const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
+  const onSubmit: SubmitHandler<ILoginForm> = useCallback(async (data) => {
     try {
       await login(data);
 
@@ -43,15 +43,27 @@ const LoginForm: FC = () => {
     } catch (err) {
       console.error("Login failed:", err);
     }
-  };
+  }, [navigate, login]);
 
   return (
     <>
       <h2>Login</h2>
       <FormProvider {...hookFormMethods}>
         <form onSubmit={hookFormMethods.handleSubmit(onSubmit)}>
-          <Input name="name" label="Name" type="text" rules={NAME_RULES} />
-          <Input name="email" label="Email" type="email" rules={EMAIL_RULES} />
+          <Input
+            name="name"
+            label="Name"
+            type="text"
+            rules={NAME_RULES}
+            placeholder="ex: John Doe"
+          />
+          <Input
+            name="email"
+            label="Email"
+            type="email"
+            rules={EMAIL_RULES}
+            placeholder="ex: john@gmail.com"
+          />
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Logging in..." : "Login"}
           </button>

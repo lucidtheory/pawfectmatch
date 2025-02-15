@@ -1,22 +1,13 @@
-import { FC, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC } from "react";
+import { useAppSelector } from "store/hooks/store";
 import LoginForm from "./LoginForm";
-import { isAuthenticated } from "utils/auth";
+import { isSessionActive } from "utils/session";
 
 const LoginPage: FC = () => {
-  const isSessionActive = isAuthenticated();
-  const navigate = useNavigate();
+  const { sessionStartTime } = useAppSelector((state) => state.session);
+  const isLoggedIn = isSessionActive(sessionStartTime);
 
-  /**
-   * If there is an active session, redirect user to search page.
-   */
-  useEffect(() => {
-    if (isSessionActive) {
-      navigate("/search", { replace: true });
-    }
-  }, [isSessionActive, navigate]);
-
-  if (isSessionActive) {
+  if (isLoggedIn) {
     return null;
   }
 

@@ -6,15 +6,17 @@ import {
   Navigate,
 } from "react-router-dom";
 import LoginPage from "pages/LoginPage/LoginPage";
-import SearchPage from "pages/SearchPage";
+import SearchPage from "pages/SearchPage/SearchPage";
+import SessionExpiredRedirect from "pages/SessionExpiredRedirect";
 
 const App: FC = () => {
   return (
     <Router>
+      <SessionExpiredRedirect />
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );

@@ -1,5 +1,5 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
-import { clearSessionStartTime } from "utils/auth";
+import { setSessionExpired } from "store/slices/session";
 
 const API_BASE_URL = "https://frontend-take-home-service.fetch.com";
 
@@ -8,7 +8,7 @@ export const baseQuery: BaseQueryFn = async ({
   method,
   body,
   headers,
-}) => {
+}, api) => {
   const response = await fetch(`${API_BASE_URL}${url}`, {
     method: method || "GET",
     headers: {
@@ -23,7 +23,8 @@ export const baseQuery: BaseQueryFn = async ({
    * Handle log out if unauthorized response is received
    */
   if (response.status === 401) {
-    clearSessionStartTime();
+    console.log('session expired')
+    api.dispatch(setSessionExpired());
     throw new Error("Session inactive");
   }
 

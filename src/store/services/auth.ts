@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "./apiBase";
 import { LoginParams } from "./types/auth";
-import { setSessionStartTime } from "utils/auth";
+import { setSessionStartTime } from "../slices/session";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -13,12 +13,12 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
 
-          // Store session start time to calculate session duration
-          setSessionStartTime();
+          // Set session start on successful login
+          dispatch(setSessionStartTime());
         } catch (err) {
           console.error("Login failed:", err);
         }
