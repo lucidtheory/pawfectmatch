@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { SubmitHandler, FormProvider, useForm } from "react-hook-form";
-import Input from "components/forms/Input/Input";
+import Input from "components/forms/Input";
 import { EMAIL_REGEX, NAME_REGEX } from "utils/regex";
 import { useLoginMutation } from "store/services/auth";
 import { useNavigate } from "react-router-dom";

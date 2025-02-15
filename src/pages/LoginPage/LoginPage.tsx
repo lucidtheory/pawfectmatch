@@ -16,6 +16,10 @@ const LoginPage: FC = () => {
     }
   }, [isSessionActive, navigate]);
 
+  if (isSessionActive) {
+    return null;
+  }
+
   return (
     <div>
       <LoginForm />
