@@ -1,10 +1,23 @@
-import { FC } from 'react';
-import LoginForm from './LoginForm';
+import { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import LoginForm from "./LoginForm";
+import { isAuthenticated } from "utils/auth";
 
 const LoginPage: FC = () => {
+  const isSessionActive = isAuthenticated();
+  const navigate = useNavigate();
+
+  /**
+   * If there is an active session, redirect user to search page.
+   */
+  useEffect(() => {
+    if (isSessionActive) {
+      navigate("/search", { replace: true });
+    }
+  }, [isSessionActive, navigate]);
 
   return (
-    <div className="login-container">
+    <div>
       <LoginForm />
     </div>
   );
