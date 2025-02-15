@@ -6,7 +6,6 @@ import {
   MatchDogsResonse,
   PostGetDogsParams,
   PostGetDogsResponse,
-  SearchDogBreedsParams,
   SearchDogBreedsResponse,
 } from "./types/dogs";
 
@@ -20,11 +19,10 @@ export const dogsApi = createApi({
         method: "GET",
       }),
     }),
-    searchDogs: builder.query<SearchDogBreedsResponse, SearchDogBreedsParams>({
-      query: (body) => ({
-        url: "/dogs/search",
-        method: "GET",
-        body,
+    searchDogs: builder.query<SearchDogBreedsResponse, string>({
+      query: (query) => ({
+          url: `/dogs/search?${query}`,
+          method: "GET",
       }),
     }),
     getDogs: builder.mutation<PostGetDogsResponse, PostGetDogsParams>({
