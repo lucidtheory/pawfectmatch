@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SearchState {
   breeds: string[];
@@ -8,27 +8,28 @@ export interface SearchState {
   size?: number;
   from?: number;
   sortBy: string;
-    sortOrder: string;
-    query: string;
+  sortOrder: string;
+  query: string;
 }
 
 const initialState: SearchState = {
-    breeds: [],
-    zipCodes: [],
-    ageMin: undefined,
-    ageMax: undefined,
-    size: undefined,
-    from: undefined,
-    sortBy: 'breed',
-    sortOrder: 'asc',
-    query: "",
+  breeds: [],
+  zipCodes: [],
+  ageMin: undefined,
+  ageMax: undefined,
+  size: undefined,
+  from: undefined,
+  sortBy: "breed",
+  sortOrder: "asc",
+  query: "",
 };
 
 const generateQuery = (state: SearchState): string => {
   const params = new URLSearchParams();
-
+  console.log(state, "state");
   if (state.breeds.length) params.append("breeds", state.breeds.join(","));
-  if (state.zipCodes.length) params.append("zipCodes", state.zipCodes.join(","));
+  if (state.zipCodes.length)
+    params.append("zipCodes", state.zipCodes.join(","));
   if (state.ageMin !== undefined) params.append("ageMin", String(state.ageMin));
   if (state.ageMax !== undefined) params.append("ageMax", String(state.ageMax));
   if (state.size) params.append("size", String(state.size));
@@ -40,9 +41,8 @@ const generateQuery = (state: SearchState): string => {
   return params.toString();
 };
 
-
 const searchSlice = createSlice({
-  name: 'search',
+  name: "search",
   initialState,
   reducers: {
     setSearchState: (state, action: PayloadAction<Partial<SearchState>>) => {

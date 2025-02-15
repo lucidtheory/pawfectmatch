@@ -22,24 +22,32 @@ const CheckboxList: FC<CheckboxListProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <fieldset>
-      <legend onClick={() => setIsExpanded(!isExpanded)}>
+    <fieldset className="w-full">
+      <legend
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="cursor-pointer"
+      >
         {label} {isExpanded ? "-" : "+"}
       </legend>
 
       {isExpanded && (
-        <div>
-          {options.map((option) => (
-            <div key={option.value}>
-              <input
-                type="checkbox"
-                id={`${name}-${option.value}`}
-                value={option.value}
-                {...register(name, rules)}
-              />
-              <label htmlFor={`${name}-${option.value}`}>{option.label}</label>
-            </div>
-          ))}
+        <div className="max-h-60 overflow-y-auto">
+          <div className="grid grid-cols-3 gap-4">
+            {options.map((option) => (
+              <div key={option.value} className="flex items-center">
+                <input
+                  type="checkbox"
+                  id={`${name}-${option.value}`}
+                  value={option.value}
+                  {...register(name, rules)}
+                  className="mr-2"
+                />
+                <label htmlFor={`${name}-${option.value}`}>
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
           {isSubmitted && <ErrorMessage errors={errors} name={name} />}
         </div>
       )}
