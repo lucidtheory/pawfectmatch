@@ -23,7 +23,6 @@ export const removeFavorite = (id: string) => {
 export const addFavorite = (dog: Dog) => {
   const favorites = getFavoriteDogs();
   const updatedFavorites = [...favorites, dog];
-  console.log(updatedFavorites, "added");
 
   sessionStorage.setItem(
     FAVORITES_STORAGE_KEY,

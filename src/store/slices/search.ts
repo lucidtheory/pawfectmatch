@@ -22,7 +22,7 @@ const initialState: SearchState = {
   query: "",
 };
 
-const generateQuery = (state: SearchState): string => {
+export const generateQuery = (state: SearchState): string => {
   const params = new URLSearchParams();
   if (state.breeds.length) {
     state.breeds.forEach((breed) => {

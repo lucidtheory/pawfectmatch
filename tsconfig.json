@@ -6,6 +6,7 @@
     "strict": true,
     "declaration": false,
     "outDir": "./dist",
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.{ts,tsx}"],
   "files": [],
