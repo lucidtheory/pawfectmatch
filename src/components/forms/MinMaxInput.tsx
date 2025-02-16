@@ -7,7 +7,7 @@ interface MinMaxInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   minValue?: number;
   maxValue?: number;
-  type?: 'number';
+  type?: "number";
 }
 
 const MinMaxInput: FC<MinMaxInputProps> = ({
@@ -35,6 +35,7 @@ const MinMaxInput: FC<MinMaxInputProps> = ({
         <input
           id={`${name}-min`}
           type="number"
+          placeholder="0"
           min={minValue}
           max={maxValue}
           {...register(`${name}.min`, {
@@ -55,6 +56,7 @@ const MinMaxInput: FC<MinMaxInputProps> = ({
           type="number"
           min={minValue}
           max={maxValue}
+          placeholder="100"
           {...register(`${name}.max`, {
             validate: (value) =>
               value && minField && Number(value) < Number(minField)

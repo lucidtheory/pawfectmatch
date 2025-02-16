@@ -25,7 +25,7 @@ export const transformStateToForm = (state: SearchState): ISearchForm => ({
   age: { min: state.ageMin, max: state.ageMax },
   breeds: state.breeds,
   zipCodes: state.zipCodes.join(", ").replace(/\s+/g, ""),
-  size: String(state.size),
+  size: state.size ? String(state.size) : undefined,
   sortBy: state.sortBy,
   sortOrder: state.sortOrder,
 });
@@ -36,7 +36,7 @@ export const transformFormToState = (
   ageMin: data.age.min,
   ageMax: data.age.max,
   breeds: data.breeds ?? [],
-  zipCodes: data.zipCodes?.replace(/\s+/g, "").split(",") ?? [],
+  zipCodes: data.zipCodes?.replace(/\s+/g, "").split(",").filter(Boolean) ?? [],
   size: Number(data.size),
   sortBy: data.sortBy,
   sortOrder: data.sortOrder,

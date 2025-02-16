@@ -59,7 +59,12 @@ const SearchForm: FC = () => {
           placeholder="ex: 10"
           min="0"
         />
-        <SortSelector fields={SORT_FIELDS} defaultField="breed" name="sort" />
+        <SortSelector
+          fields={SORT_FIELDS}
+          defaultField="breed"
+          sortOrderName="sortOrder"
+          sortFieldName="sortBy"
+        />
         <button type="submit">Search</button>
       </form>
     </FormProvider>

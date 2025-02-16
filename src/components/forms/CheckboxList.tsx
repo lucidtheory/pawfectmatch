@@ -17,9 +17,11 @@ const CheckboxList: FC<CheckboxListProps> = ({
 }) => {
   const {
     register,
+    watch,
     formState: { errors, isSubmitted },
   } = useFormContext();
   const [isExpanded, setIsExpanded] = useState(false);
+  const selected = watch(name);
 
   return (
     <fieldset className="w-full">
@@ -29,7 +31,7 @@ const CheckboxList: FC<CheckboxListProps> = ({
       >
         {label} {isExpanded ? "-" : "+"}
       </legend>
-
+      {!!selected.length && <p>{selected.join(", ")}</p>}
       {isExpanded && (
         <div className="max-h-60 overflow-y-auto">
           <div className="grid grid-cols-3 gap-4">

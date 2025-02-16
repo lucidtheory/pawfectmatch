@@ -1,34 +1,39 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface SortSelectorProps {
   fields: string[];
   defaultField: string;
-  name: string;
+  sortOrderName: string;
+  sortFieldName: string;
 }
 
 const SortSelector: FC<SortSelectorProps> = ({
   fields,
   defaultField,
-  name,
+  sortOrderName,
+  sortFieldName,
 }) => {
   const [selectedField, setSelectedField] = useState<string>(defaultField);
   const [selectedDirection, setSelectedDirection] = useState<string>("asc");
 
   const { setValue } = useFormContext();
 
-  useEffect(() => {
-    const sortValue = `sort=${selectedField}:${selectedDirection}`;
-    setValue(name, sortValue);
-  }, [selectedField, selectedDirection, name, setValue]);
+  const handleChangeField = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setValue(sortFieldName, e.target.value);
+      setSelectedField(e.target.value);
+    },
+    [sortFieldName, setValue],
+  );
 
-  const handleChangeField = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedField(e.target.value);
-  };
-
-  const handleChangeDirection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedDirection(e.target.value);
-  };
+  const handleChangeDirection = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setValue(sortOrderName, e.target.value);
+      setSelectedDirection(e.target.value);
+    },
+    [sortOrderName, setValue],
+  );
 
   return (
     <div>
