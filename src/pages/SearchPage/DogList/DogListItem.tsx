@@ -1,11 +1,29 @@
-import { FC } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import { Dog } from "store/services/types/dogs";
+import { addFavorite, isDogFavorite, removeFavorite } from "utils/favorites";
 
 interface DogListItemProps {
   dog: Dog;
 }
 
 const DogListItem: FC<DogListItemProps> = ({ dog }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // Check if the dog is in sessionStorage when the component mounts
+  useEffect(() => {
+    setIsFavorite(isDogFavorite(dog.id));
+  }, [dog.id]);
+
+  const toggleFavorite = useCallback(() => {
+    if (isFavorite) {
+      removeFavorite(dog.id);
+    } else {
+      addFavorite(dog);
+    }
+
+    setIsFavorite(!isFavorite);
+  }, [dog, isFavorite]);
+
   return (
     <div className="p-2 flex items-center border-b">
       <img
@@ -19,6 +37,12 @@ const DogListItem: FC<DogListItemProps> = ({ dog }) => {
         <p>
           {dog.breed} - {dog.age} years old
         </p>
+        <button
+          onClick={toggleFavorite}
+          className={`mt-2 px-4 py-2 ${isFavorite ? "bg-red-500 text-white" : "bg-gray-200 text-black"}`}
+        >
+          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+        </button>
       </div>
     </div>
   );
