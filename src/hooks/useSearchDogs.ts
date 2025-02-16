@@ -2,7 +2,7 @@ import { useGetDogsMutation, useSearchDogsQuery } from "store/services/dogs";
 import { useAppSelector } from "store/hooks/store";
 import { useEffect, useState, useCallback } from "react";
 
-const updateQueryWithNewFrom = (
+export const updateQueryWithNewFrom = (
   prevPath: string | null,
   newPath: string | null,
 ) => {

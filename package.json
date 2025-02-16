@@ -29,21 +29,35 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testRegex": ".spec.ts$",
+    "testRegex": ".*\\.spec\\.tsx?$",
+    "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.(t|j)s$": [
+      "^.+\\.(t|j)sx?$": [
         "ts-jest",
-        { "tsconfig": "<rootDir>/tsconfig.app.json"}
+        {
+          "tsconfig": "<rootDir>/tsconfig.app.json"
+        }
       ]
     },
-    "moduleFileExtensions": ["ts", "tsx", "js", "json"],
-    "roots": ["<rootDir>/src"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ],
     "moduleNameMapper": {
       "^((utils|components|hooks|pages|store)/(.*))$": "<rootDir>/src/$1"
     }
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
