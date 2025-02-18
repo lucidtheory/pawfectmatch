@@ -1,6 +1,6 @@
 import { FC } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Routes,
   Navigate,
@@ -11,7 +11,7 @@ import SessionExpiredRedirect from "pages/SessionExpiredRedirect";
 
 const App: FC = () => {
   return (
-    <Router basename="/pawfectmatch">
+    <Router>
       <header className="app-header">
         <h1>Pawfect Match</h1>
       </header>
