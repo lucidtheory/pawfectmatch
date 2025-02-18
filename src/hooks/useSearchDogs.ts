@@ -50,12 +50,14 @@ export const useSearchDogs = () => {
     setActiveQuery((prevActive) =>
       updateQueryWithNewFrom(prevActive, nextQuery),
     );
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [nextQuery, getDogs]);
 
   const fetchPrevPage = useCallback(() => {
     setActiveQuery((prevActive) =>
       updateQueryWithNewFrom(prevActive, prevQuery),
     );
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [prevQuery, getDogs]);
 
   return {
