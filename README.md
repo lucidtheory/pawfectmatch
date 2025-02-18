@@ -1,4 +1,4 @@
-# PawfectMatch
+# Pawfect Match
 
 **PawfectMatch** is a dog adoption search site built with React, Redux, TailwindCSS, and Material UI as well as Redux toolkit.
 
