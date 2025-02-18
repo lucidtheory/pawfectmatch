@@ -12,6 +12,9 @@ import SessionExpiredRedirect from "pages/SessionExpiredRedirect";
 const App: FC = () => {
   return (
     <Router>
+      <header className="app-header">
+        <h1>Pawfect Match</h1>
+      </header>
       <SessionExpiredRedirect />
       <Routes>
         <Route path="/login" element={<LoginPage />} />

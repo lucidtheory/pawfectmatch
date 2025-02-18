@@ -7,6 +7,7 @@ import SortSelector from "components/forms/SortSelector";
 import Input from "components/forms/Input";
 import CheckboxList from "components/forms/CheckboxList";
 import { useGetBreedsQuery } from "store/services/dogs";
+import Button from "@mui/material/Button";
 import {
   ZIP_CODE_RULES,
   SORT_FIELDS,
@@ -15,6 +16,7 @@ import {
   transformStateToForm,
   ISearchForm,
 } from "./SearchForm.utils";
+import styles from "./SearchForm.styles";
 
 const SearchForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -65,7 +67,14 @@ const SearchForm: FC = () => {
           sortOrderName="sortOrder"
           sortFieldName="sortBy"
         />
-        <button type="submit">Search</button>
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          sx={styles.submitButton}
+        >
+          Search
+        </Button>
       </form>
     </FormProvider>
   );

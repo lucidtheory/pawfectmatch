@@ -1,6 +1,7 @@
 import { FC, useCallback } from "react";
 import { SubmitHandler, FormProvider, useForm } from "react-hook-form";
 import Input from "components/forms/Input";
+import Button from "@mui/material/Button";
 import { EMAIL_REGEX, NAME_REGEX } from "utils/regex";
 import { useLoginMutation } from "store/services/auth";
 import { useNavigate } from "react-router-dom";
@@ -31,19 +32,22 @@ const LoginForm: FC = () => {
   const navigate = useNavigate();
   const [login, { isLoading, isError }] = useLoginMutation();
 
-  const onSubmit: SubmitHandler<ILoginForm> = useCallback(async (data) => {
-    try {
-      await login(data);
+  const onSubmit: SubmitHandler<ILoginForm> = useCallback(
+    async (data) => {
+      try {
+        await login(data);
 
-      /**
-       * Replace login route so that user doesnt go back
-       * to login on back press.
-       */
-      navigate("/search", { replace: true });
-    } catch (err) {
-      console.error("Login failed:", err);
-    }
-  }, [navigate, login]);
+        /**
+         * Replace login route so that user doesnt go back
+         * to login on back press.
+         */
+        navigate("/search", { replace: true });
+      } catch (err) {
+        console.error("Login failed:", err);
+      }
+    },
+    [navigate, login],
+  );
 
   return (
     <>
@@ -64,9 +68,15 @@ const LoginForm: FC = () => {
             rules={EMAIL_RULES}
             placeholder="ex: john@gmail.com"
           />
-          <button type="submit" disabled={isLoading}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={isLoading}
+            fullWidth
+          >
             {isLoading ? "Logging in..." : "Login"}
-          </button>
+          </Button>
           {isError && <p>Login failed</p>}
         </form>
       </FormProvider>

@@ -1,6 +1,13 @@
 import { FC, useState, useEffect, useCallback } from "react";
 import { Dog } from "store/services/types/dogs";
 import { addFavorite, isDogFavorite, removeFavorite } from "utils/favorites";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+} from "@mui/material";
 
 interface DogListItemProps {
   dog: Dog;
@@ -25,26 +32,34 @@ const DogListItem: FC<DogListItemProps> = ({ dog }) => {
   }, [dog, isFavorite]);
 
   return (
-    <div className="p-2 flex items-center border-b">
-      <img
-        src={dog.img}
+    <Card sx={{ display: "flex", mb: 2 }}>
+      <CardMedia
+        component="img"
+        image={dog.img}
         alt={dog.name}
-        className="w-16 h-16 rounded-lg mr-4"
-        style={{ height: 100, width: 100 }}
+        sx={{ width: 150, maxHeight: 150, objectFit: "stretch" }}
       />
-      <div>
-        <h3 className="font-semibold">{dog.name}</h3>
-        <p>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h6">{dog.name}</Typography>
+        <Typography variant="body2" color="textSecondary">
           {dog.breed} - {dog.age} years old
-        </p>
-        <button
+        </Typography>
+        <Button
           onClick={toggleFavorite}
-          className={`mt-2 px-4 py-2 ${isFavorite ? "bg-red-500 text-white" : "bg-gray-200 text-black"}`}
+          variant="contained"
+          color={isFavorite ? "warning" : "primary"}
+          sx={{ mt: 2 }}
         >
           {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 

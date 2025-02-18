@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { useAppSelector } from "store/hooks/store";
-import LoginForm from "./LoginForm";
+import LoginForm from "./LoginForm/LoginForm";
 import { isSessionActive } from "utils/session";
+import "./LoginPage.css";
 
 const LoginPage: FC = () => {
   const { sessionStartTime } = useAppSelector((state) => state.session);
@@ -12,8 +13,10 @@ const LoginPage: FC = () => {
   }
 
   return (
-    <div>
-      <LoginForm />
+    <div className="login-container">
+      <div className="form-wrapper">
+        <LoginForm />
+      </div>
     </div>
   );
 };

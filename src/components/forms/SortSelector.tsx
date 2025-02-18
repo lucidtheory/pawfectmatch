@@ -1,5 +1,13 @@
 import { FC, useState, useCallback } from "react";
 import { useFormContext } from "react-hook-form";
+import {
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  SelectChangeEvent,
+} from "@mui/material";
+import styles from "./SortSelector.styles";
 
 interface SortSelectorProps {
   fields: string[];
@@ -20,7 +28,7 @@ const SortSelector: FC<SortSelectorProps> = ({
   const { setValue } = useFormContext();
 
   const handleChangeField = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (e: SelectChangeEvent<string>) => {
       setValue(sortFieldName, e.target.value);
       setSelectedField(e.target.value);
     },
@@ -28,7 +36,7 @@ const SortSelector: FC<SortSelectorProps> = ({
   );
 
   const handleChangeDirection = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (e: SelectChangeEvent<string>) => {
       setValue(sortOrderName, e.target.value);
       setSelectedDirection(e.target.value);
     },
@@ -36,25 +44,35 @@ const SortSelector: FC<SortSelectorProps> = ({
   );
 
   return (
-    <div>
-      <label htmlFor="field">Sort by</label>
-      <select id="field" value={selectedField} onChange={handleChangeField}>
-        {fields.map((field) => (
-          <option key={field} value={field}>
-            {field}
-          </option>
-        ))}
-      </select>
+    <div style={styles.fieldContainer}>
+      <FormControl sx={styles.input}>
+        <InputLabel id="field">Sort by</InputLabel>
+        <Select
+          labelId="field"
+          value={selectedField}
+          onChange={handleChangeField}
+          label="Sort by"
+        >
+          {fields.map((field) => (
+            <MenuItem key={field} value={field}>
+              {field}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
-      <label htmlFor="direction">Direction</label>
-      <select
-        id="direction"
-        value={selectedDirection}
-        onChange={handleChangeDirection}
-      >
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
+      <FormControl className="sort-input">
+        <InputLabel id="direction">Direction</InputLabel>
+        <Select
+          labelId="direction"
+          value={selectedDirection}
+          onChange={handleChangeDirection}
+          label="Direction"
+        >
+          <MenuItem value="asc">ascending</MenuItem>
+          <MenuItem value="desc">descending</MenuItem>
+        </Select>
+      </FormControl>
     </div>
   );
 };

@@ -1,6 +1,14 @@
 import { FC, useState } from "react";
 import { useFormContext, RegisterOptions } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Collapse,
+} from "@mui/material";
+import styles from "./CheckboxList.styles";
 
 interface CheckboxListProps {
   name: string;
@@ -24,35 +32,34 @@ const CheckboxList: FC<CheckboxListProps> = ({
   const selected = watch(name);
 
   return (
-    <fieldset className="w-full">
-      <legend
+    <fieldset className="w-full" style={styles.fieldSet}>
+      <FormLabel
+        component="legend"
         onClick={() => setIsExpanded(!isExpanded)}
-        className="cursor-pointer"
+        sx={styles.formLabel}
       >
         {label} {isExpanded ? "-" : "+"}
-      </legend>
-      {!!selected.length && <p>{selected.join(", ")}</p>}
-      {isExpanded && (
-        <div className="max-h-60 overflow-y-auto">
-          <div className="grid grid-cols-3 gap-4">
-            {options.map((option) => (
-              <div key={option.value} className="flex items-center">
-                <input
-                  type="checkbox"
+      </FormLabel>
+      {!!selected?.length && <p>{selected.join(", ")}</p>}
+      <Collapse in={isExpanded}>
+        <FormGroup sx={styles.formGroup}>
+          {options.map((option) => (
+            <FormControlLabel
+              key={option.value}
+              control={
+                <Checkbox
                   id={`${name}-${option.value}`}
                   value={option.value}
                   {...register(name, rules)}
-                  className="mr-2"
+                  color="primary"
                 />
-                <label htmlFor={`${name}-${option.value}`}>
-                  {option.label}
-                </label>
-              </div>
-            ))}
-          </div>
-          {isSubmitted && <ErrorMessage errors={errors} name={name} />}
-        </div>
-      )}
+              }
+              label={option.label}
+            />
+          ))}
+        </FormGroup>
+        {isSubmitted && <ErrorMessage errors={errors} name={name} />}
+      </Collapse>
     </fieldset>
   );
 };

@@ -1,6 +1,8 @@
 import { FC, InputHTMLAttributes } from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { TextField, FormLabel } from "@mui/material";
+import styles from "./MinMaxInput.styles";
 
 interface MinMaxInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -15,7 +17,6 @@ const MinMaxInput: FC<MinMaxInputProps> = ({
   label,
   minValue = 0,
   maxValue = Infinity,
-  ...rest
 }) => {
   const {
     register,
@@ -27,45 +28,49 @@ const MinMaxInput: FC<MinMaxInputProps> = ({
   const maxField = watch(`${name}.max`);
 
   return (
-    <fieldset>
-      <legend>{label}</legend>
-
-      <div>
-        <label htmlFor={`${name}-min`}>Min</label>
-        <input
-          id={`${name}-min`}
-          type="number"
-          placeholder="0"
-          min={minValue}
-          max={maxValue}
-          {...register(`${name}.min`, {
-            validate: (value) =>
-              value && maxField && Number(value) > Number(maxField)
-                ? "Min cannot be greater than Max"
-                : true,
-          })}
-          {...rest}
-        />
-        {isSubmitted && <ErrorMessage errors={errors} name={`${name}.min`} />}
-      </div>
-
-      <div>
-        <label htmlFor={`${name}-max`}>Max</label>
-        <input
-          id={`${name}-max`}
-          type="number"
-          min={minValue}
-          max={maxValue}
-          placeholder="100"
-          {...register(`${name}.max`, {
-            validate: (value) =>
-              value && minField && Number(value) < Number(minField)
-                ? "Max cannot be less than Min"
-                : true,
-          })}
-          {...rest}
-        />
-        {isSubmitted && <ErrorMessage errors={errors} name={`${name}.max`} />}
+    <fieldset style={styles.fieldSet}>
+      <FormLabel component="legend" sx={styles.formLabel}>
+        {label}
+      </FormLabel>
+      <div style={styles.fieldContainer}>
+        <div style={styles.input}>
+          <TextField
+            id={`${name}-min`}
+            label="Min"
+            type="number"
+            helperText="ex: 0"
+            min={minValue}
+            max={maxValue}
+            {...register(`${name}.min`, {
+              validate: (value) =>
+                value && maxField && Number(value) > Number(maxField)
+                  ? "Min cannot be greater than Max"
+                  : true,
+            })}
+            fullWidth
+            error={!!errors[name]}
+          />
+          {isSubmitted && <ErrorMessage errors={errors} name={`${name}.min`} />}
+        </div>
+        <div style={styles.input}>
+          <TextField
+            id={`${name}-max`}
+            label="Max"
+            type="number"
+            helperText="ex: 100"
+            min={minValue}
+            max={maxValue}
+            {...register(`${name}.max`, {
+              validate: (value) =>
+                value && minField && Number(value) < Number(minField)
+                  ? "Max cannot be less than Min"
+                  : true,
+            })}
+            fullWidth
+            error={!!errors[name]}
+          />
+          {isSubmitted && <ErrorMessage errors={errors} name={`${name}.max`} />}
+        </div>
       </div>
     </fieldset>
   );

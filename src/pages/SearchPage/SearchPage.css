@@ -1,0 +1,16 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%; 
+    padding: 30px;
+    box-sizing: border-box;
+  }
+  
+.search-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
