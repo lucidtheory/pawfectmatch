@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "./apiBase";
 import { LoginParams } from "./types/auth";
-import { setSessionStartTime } from "../slices/session";
+import { setSessionExpired, setSessionStartTime } from "../slices/session";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -29,6 +29,16 @@ export const authApi = createApi({
         url: "/auth/logout",
         method: "POST",
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+
+          // Clear session on logout
+          dispatch(setSessionExpired());
+        } catch (err) {
+          console.error("Login failed:", err);
+        }
+      },
     }),
   }),
 });
