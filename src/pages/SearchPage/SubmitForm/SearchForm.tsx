@@ -37,7 +37,8 @@ const SearchForm: FC = () => {
     defaultValues: initialValues,
   });
 
-  const onSubmit: SubmitHandler<ISearchForm> = (data) => {
+  const onSubmit: SubmitHandler<ISearchForm> = (data, e) => {
+    e?.preventDefault();
     const stateData = transformFormToState(data);
     dispatch(setSearchState(stateData));
   };

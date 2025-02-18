@@ -33,8 +33,10 @@ const LoginForm: FC = () => {
   const [login, { isLoading, isError }] = useLoginMutation();
 
   const onSubmit: SubmitHandler<ILoginForm> = useCallback(
-    async (data) => {
+    async (data, e) => {
       try {
+        e?.preventDefault();
+
         await login(data);
 
         /**
