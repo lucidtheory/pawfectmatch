@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# PawfectMatch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**PawfectMatch** is a dog adoption search site built with React, Redux, TailwindCSS, and Material UI as well as Redux toolkit.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository:
 
-## Expanding the ESLint configuration
+   ```bash
+   git clone https://github.com/your-username/pawfectmatch.git
+   cd pawfectmatch
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Install dependencies using **Yarn**:
 
-- Configure the top-level `parserOptions` property like this:
+   ```bash
+   yarn install
+   ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. Start the development server:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   ```bash
+   yarn dev
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   The app will be available at [http://localhost:5173](http://localhost:5173).
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+4. To run Cypress tests:
+
+   ```bash
+   yarn cypress open
+   ```
+
+   This will open the Cypress UI, where you can run the tests.
+
+5. To run unit tests:
+
+   ```bash
+   yarn test
+   ```

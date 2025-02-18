@@ -6,11 +6,13 @@ import { useLogoutMutation } from "store/services/auth";
 import Button from "@mui/material/Button";
 import "./SearchPage.css";
 import { getFavoriteDogIds, getFavoriteDog } from "utils/favorites";
+import DogModal from "components/DogModal";
 
 const SearchPage: FC = () => {
   const [isSearchFormVisible, setSearchFormVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [logout] = useLogoutMutation();
-  const [matchDogs, { data: matchedDog }] = useMatchDogsMutation();
+  const [matchDogs, { data: matchedDog, isLoading }] = useMatchDogsMutation();
 
   // Fetch dog breeds on mount
   useGetBreedsQuery(undefined);
@@ -24,14 +26,12 @@ const SearchPage: FC = () => {
     }
 
     matchDogs(favoriteDogIds);
+    setOpenModal(true);
   }, [matchDogs]);
 
   const handleLogout = () => {
     void logout();
   };
-
-  // Matched dog
-  console.log(getFavoriteDog(matchedDog?.match));
 
   return (
     <div className="search-container">
@@ -57,6 +57,12 @@ const SearchPage: FC = () => {
       </div>
       {isSearchFormVisible && <SearchForm />}
       <DogList />
+      <DogModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        matchedDog={getFavoriteDog(matchedDog?.match)}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

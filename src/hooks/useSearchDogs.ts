@@ -29,7 +29,6 @@ export const useSearchDogs = () => {
     refetchOnMountOrArgChange: true,
   });
   const [getDogs, { isLoading, isError, data: dogs }] = useGetDogsMutation();
-
   /**
    * Fetch dogs when search results are available
    * And when they change, also set the next and prev queries
