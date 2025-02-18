@@ -7,7 +7,6 @@ describe("updateQueryWithNewFrom", () => {
 
     const result = updateQueryWithNewFrom(prevPath, newPath);
 
-    // Checking that the "from" parameter is updated correctly
     expect(result).toBe("from=newValue");
   });
 
@@ -17,7 +16,6 @@ describe("updateQueryWithNewFrom", () => {
 
     const result = updateQueryWithNewFrom(prevPath, newPath);
 
-    // "from" should be added from newPath
     expect(result).toBe("from=newValue");
   });
 
@@ -27,7 +25,6 @@ describe("updateQueryWithNewFrom", () => {
 
     const result = updateQueryWithNewFrom(prevPath, newPath);
 
-    // Should return "from=newValue" since newPath contains "from"
     expect(result).toBe("from=newValue");
   });
 });
