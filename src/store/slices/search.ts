@@ -19,7 +19,7 @@ const initialState: SearchState = {
   size: undefined,
   sortBy: "breed",
   sortOrder: "asc",
-  query: "",
+  query: "sort=breed%3Aasc",
 };
 
 export const generateQuery = (state: SearchState): string => {
