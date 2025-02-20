@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "./apiBase";
 import { LoginParams } from "./types/auth";
 import { setSessionExpired, setSessionStartTime } from "../slices/session";
+import { resetSearchState } from "store/slices/search";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -35,6 +36,7 @@ export const authApi = createApi({
 
           // Clear session on logout
           dispatch(setSessionExpired());
+          dispatch(resetSearchState());
         } catch (err) {
           console.error("Login failed:", err);
         }
