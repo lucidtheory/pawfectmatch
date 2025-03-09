@@ -1,4 +1,6 @@
 # Pawfect Match
+Public hosted link: https://lucidtheory.github.io/pawfectmatch
+
 
 **PawfectMatch** is a dog adoption search site built with React, Redux, TailwindCSS, and Material UI as well as Redux toolkit.
 
