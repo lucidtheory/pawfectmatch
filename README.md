@@ -1,6 +1,8 @@
 # Pawfect Match
 Public hosted link: 
+
 (use any name and email for login)
+
 Authentication cookie will not work on Safari because of cross origin cookie
 https://lucidtheory.github.io/pawfectmatch
 
